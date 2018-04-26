@@ -20,12 +20,7 @@ REVOKE_DATA = {
 def get_token():
     """Get token to make API call."""
 
-    try:
-        res = requests.post(LOGIN_URL, LOGIN_DATA)
-    except Exception as err:
-        print("{}".format(err))
-        return None
-
+    res = requests.post(LOGIN_URL, LOGIN_DATA)
     if res.status_code == 200:
         return res.json()["access_token"]
     else:
@@ -48,13 +43,7 @@ def get_user_endpoints(headers, full_username):
     username, domain = full_username.split("@")
     user_endpoints_url = "https://clearpass.example.com/api/endpoint?filter=%7B%22social_username%22%3A%20%22" \
                          "{0}%40{1}%22%7D".format(username, domain)
-
-    try:
-        res = requests.get(user_endpoints_url, headers=headers)
-    except Exception as err:
-        print("{}".format(err))
-        return None
-
+    res = requests.get(user_endpoints_url, headers=headers)
     if res.status_code == 200:
         user_endpoints = []
         for i, endpoint in enumerate(res.json()["_embedded"]["items"]):
@@ -80,13 +69,7 @@ def get_user_cert_ids(headers, full_username):
     username, domain = full_username.split("@")
     user_certs_url = "https://clearpass.example.com/api/certificate?filter=%7B%22subject_common_name%22%3A%20%22" \
                      "{0}%40{1}%22%7D".format(username, domain)
-    
-    try:
-        res = requests.get(user_certs_url, headers=headers)
-    except Exception as err:
-        print("{}".format(err))
-        return None
-    
+    res = requests.get(user_certs_url, headers=headers)
     if res.status_code == 200:
         user_cert_ids = [cert["id"] for i, cert in enumerate(res.json()["_embedded"]["items"])]
         return user_cert_ids
@@ -104,16 +87,12 @@ def delete_user_endpoints(headers, user_endpoints):
     :param user_endpoints: a list of mac addresses
     :type user_endpoints: list
 
-    :return: True if deleted successfully else False
+    :return: True if deleted successfully
     """
 
     for endpoint in user_endpoints:
         delete_endpoint_url = "https://clearpass.example.com/api/endpoint/mac-address/{}".format(endpoint)
-        try:
-            requests.delete(delete_endpoint_url, headers=headers)
-        except Exception as err:
-            print("{}".format(err))
-            return False
+        requests.delete(delete_endpoint_url, headers=headers)
 
     print("Deleted all user endpoints successfully")
     return True
@@ -128,7 +107,7 @@ def update_user_endpoints(headers, user_endpoints):
     :param user_endpoints: a list of mac addresses
     :type user_endpoints: list
 
-    :return: True if updated successfully else False
+    :return: True if updated successfully
     """
 
     update_data = {
@@ -141,11 +120,7 @@ def update_user_endpoints(headers, user_endpoints):
 
     for endpoint in user_endpoints:
         update_endpoints_url = "https://clearpass.example.com/api/endpoint/mac-address/{}".format(endpoint)
-        try:
-            requests.patch(update_endpoints_url, headers=headers, json=update_data)
-        except Exception as err:
-            print("{}".format(err))
-            return False
+        requests.patch(update_endpoints_url, headers=headers, json=update_data)
 
     print("Updated all user endpoints successfully")
     return True
@@ -160,16 +135,12 @@ def revoke_user_certs(headers, user_cert_ids):
     :param user_cert_ids: a list of cert IDs
     :type user_cert_ids: list
 
-    :return: True if revoked successfully else False
+    :return: True if revoked successfully
     """
 
     for cert_id in user_cert_ids:
         revoke_certs_url = "https://clearpass.example.com/api/certificate/{}/revoke".format(cert_id)
-        try:
-            requests.post(revoke_certs_url, headers=headers, json=REVOKE_DATA)
-        except Exception as err:
-            print("{}".format(err))
-            return False
+        requests.post(revoke_certs_url, headers=headers, json=REVOKE_DATA)
         
     print("Revoked all user certs successfully")
     return True
