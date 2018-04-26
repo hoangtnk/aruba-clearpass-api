@@ -2,7 +2,7 @@
 #
 # Use ClearPass API to revoke all certs of a specific user
 
-from apis import get_token, get_user_cert_ids, revoke_user_certs
+from api import get_token, get_user_cert_ids, revoke_user_certs
 
 
 if __name__ == "__main__":

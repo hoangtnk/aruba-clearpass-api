@@ -2,7 +2,7 @@
 #
 # Use ClearPass API to update attributes for all endpoints of a specific user
 
-from apis import get_token, get_user_endpoints, update_user_endpoints
+from api import get_token, get_user_endpoints, update_user_endpoints
 
 
 if __name__ == "__main__":

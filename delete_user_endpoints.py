@@ -2,7 +2,7 @@
 #
 # Use ClearPass API to delete all endpoints of a specific user
 
-from apis import get_token, get_user_endpoints, delete_user_endpoints
+from api import get_token, get_user_endpoints, delete_user_endpoints
 
 
 if __name__ == "__main__":
