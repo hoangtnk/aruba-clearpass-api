@@ -1,2 +1,2 @@
 # clearpass_api
-Some functions to interact with ClearPass API
+Some code snippets to interact with ClearPass API
