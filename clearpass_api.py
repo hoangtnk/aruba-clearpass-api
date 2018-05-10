@@ -51,7 +51,7 @@ class ClearPassAPI:
             raise ValueError(msg)
 
     def get_endpoints(self, full_username):
-        """Get all endpoints of a specific user.
+        """Get all endpoints of a certain user.
 
         :param full_username: username in full format (i.e. username@example.com)
         :type full_username: str
@@ -75,7 +75,7 @@ class ClearPassAPI:
             raise ValueError(msg)
 
     def get_cert_ids(self, full_username):
-        """Get all cert IDs of a specific user. This is required to revoke user certs.
+        """Get all cert IDs of a certain user. This is required to revoke user certs.
 
         :param full_username: username in full format (i.e. username@example.com)
         :type full_username: str
@@ -97,7 +97,7 @@ class ClearPassAPI:
             raise ValueError(msg)
 
     def delete_endpoints(self, endpoints):
-        """Delete all endpoints of a specific user.
+        """Delete all endpoints of a certain user.
 
         :param endpoints: a list of mac addresses
         :type endpoints: list
@@ -111,7 +111,7 @@ class ClearPassAPI:
         return True
 
     def update_endpoints(self, endpoints, **kwargs):
-        """Update attributes for all endpoints of a specific user.
+        """Update attributes for all endpoints of a certain user.
 
         :param endpoints: a list of mac addresses
         :type endpoints: list
