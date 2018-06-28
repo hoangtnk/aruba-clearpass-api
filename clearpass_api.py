@@ -3,7 +3,7 @@
 import requests
 
 
-class ClearPassAPI:
+class ClearPassAPI(object):
     """API object to interact with ClearPass API."""
 
     def __init__(self, host, grant_type, client_id, client_secret,
